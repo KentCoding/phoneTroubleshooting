@@ -3,7 +3,11 @@ import sys, warnings, string
 
 #Define Globals
 brands = ["apple", "android", "windows"]
-brand = ''
+brand = None
+
+def init():
+    warnings.filterwarnings("ignore") #Disable for debugging
+    print("Init")
 
 def Main():
     init()
@@ -13,21 +17,28 @@ def Main():
     query = input("Enter your query: ").lower()
     brand = brandSelector(query)
     print(brand)
-    
-    if brand in brands:
-        print("Exist")
 
 def brandSelector(query):
-    try: 
+    try:
+        #Format Brands Query
         brand = set(brands).intersection(query.split())
-        print("After Intersection: ", brand)
         brand = ', '.join(brand)
+        #Check Condition After Setting
+        int_cond = confirmIntersection(brand)
+        if int_cond == False:
+           raise NameError("No Intersection")
         return brand
-    except ValueError:
-        print("Brand does not exist")
+    except NameError:
+        print("\nNo Intersection found between query defined brand and brands array\n")
+        raise
 
-def init():
-    warnings.filterwarnings("ignore") #Disable while debugging
+def confirmIntersection(brand):
+    if brand in brands:
+        #print("True") #Debug Check
+        return True
+    else:
+        #print("False") #Debug Check
+        return False
 
 if __name__ == '__main__':
     Main()
