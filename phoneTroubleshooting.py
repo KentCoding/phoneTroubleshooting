@@ -1,7 +1,5 @@
 #Import Modules
-import warnings
-import string
-import sys
+import sys, warnings, string
 
 #Define Globals
 brands = ["apple", "android", "windows"]
@@ -22,9 +20,10 @@ def Main():
 def brandSelector(query):
     try: 
         brand = set(brands).intersection(query.split())
+        print("After Intersection: ", brand)
         brand = ', '.join(brand)
         return brand
-    except error:
+    except ValueError:
         print("Brand does not exist")
 
 def init():
