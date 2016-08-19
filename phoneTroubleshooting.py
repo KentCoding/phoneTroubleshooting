@@ -6,18 +6,20 @@ brands = ["apple", "android", "windows"]
 brand = None
 
 def init():
-    warnings.filterwarnings("ignore") #Disable for debugging
-    print("Init")
-
-def Main():
-    init()
+    #Define Imported Module Settings
+    warnings.filterwarnings("ignore") #Disable for debuggings
+    #Main Menu
     print("--Welcome to Troubleshooting Applet--")
     print("In your query please include the brand of your device and the problem / symptom of your current issue. \n")
 
+def Main():
+    init()
     query = input("Enter your query: ").lower()
+    
     brand = brandSelector(query)
     print(brand)
 
+#Code Infrastructure and Modules
 def brandSelector(query):
     try:
         #Format Brands Query
