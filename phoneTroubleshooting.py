@@ -6,8 +6,8 @@ brands = ["apple", "android", "windows"]
 brand = None
 
 def init():
-    #Define
-    #warnings.filterwarnings("ignore") #Disable for debuggings
+    #Define Module Settings
+    warnings.filterwarnings("ignore") #Disable for debuggings
     #Main Menu
     print("--Welcome to Troubleshooting Applet--")
     print("In your query please include the brand of your device and the problem / symptom of your current issue. \n")
@@ -17,12 +17,6 @@ def Main():
     query = input("Enter your query: ").lower()
     brand = brandSelector(query)
     print(brand)
-    #secondaryMain(query)
-    print("END")
-
-def secondaryMain(query):
-    #Push required variables to next stage
-    print(query)
 
 ##START Brand Selection Route
 def brandSelector(query):
@@ -34,11 +28,10 @@ def brandSelector(query):
         int_cond = confirmIntersection(brand)
         if int_cond == False:
             raise NameError("No Intersection")
-            #brandDetectionFailure()
         return brand
     except NameError:
         print("\nNo Intersection found between query defined brand and brands array\n")
-        brandDetectionFailure()
+        return brandDetectionFailure()
 
 def confirmIntersection(brand):
     if brand in brands:
@@ -52,7 +45,7 @@ def brandDetectionFailure():
     print("-Brand could not be found-")
     print("Query still stored for your issue")
     if userConfirm("Would you like to redefine a brand and continue?"):
-        defineBrand()
+        return defineBrand()
     else:
         end()
 
