@@ -14,10 +14,14 @@ def init():
 
 def Main():
     init()
+<<<<<<< HEAD
     if brand None:
         query = input("Enter your query: ").lower()
     else:
         print("Brand Selected, Only problem query")
+=======
+    query = input("Enter your query: ").lower()
+>>>>>>> master
     
     brand = brandSelector(query)
     print(brand)
