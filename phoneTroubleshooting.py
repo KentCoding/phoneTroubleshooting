@@ -6,27 +6,25 @@ brands = ["apple", "android", "windows"]
 brand = None
 
 def init():
-    #Define Imported Module Settings
-    warnings.filterwarnings("ignore") #Disable for debuggings
+    #Define
+    #warnings.filterwarnings("ignore") #Disable for debuggings
     #Main Menu
     print("--Welcome to Troubleshooting Applet--")
     print("In your query please include the brand of your device and the problem / symptom of your current issue. \n")
 
 def Main():
     init()
-<<<<<<< HEAD
-    if brand None:
-        query = input("Enter your query: ").lower()
-    else:
-        print("Brand Selected, Only problem query")
-=======
     query = input("Enter your query: ").lower()
->>>>>>> master
-    
     brand = brandSelector(query)
     print(brand)
+    #secondaryMain(query)
+    print("END")
 
-#Code Infrastructure and Modules
+def secondaryMain(query):
+    #Push required variables to next stage
+    print(query)
+
+##START Brand Selection Route
 def brandSelector(query):
     try:
         #Format Brands Query
@@ -35,19 +33,56 @@ def brandSelector(query):
         #Check Condition After Setting
         int_cond = confirmIntersection(brand)
         if int_cond == False:
-           raise NameError("No Intersection")
+            raise NameError("No Intersection")
+            #brandDetectionFailure()
         return brand
     except NameError:
         print("\nNo Intersection found between query defined brand and brands array\n")
-        raise
+        brandDetectionFailure()
 
 def confirmIntersection(brand):
     if brand in brands:
-        #print("True") #Debug Check
         return True
     else:
-        #print("False") #Debug Check
         return False
+##END Brand Selection Route
+
+##START Brand Selection Route | SUB: Failed Selection
+def brandDetectionFailure():
+    print("-Brand could not be found-")
+    print("Query still stored for your issue")
+    if userConfirm("Would you like to redefine a brand and continue?"):
+        defineBrand()
+    else:
+        end()
+
+def defineBrand():
+    brand = input("Enter your device's brand: ")
+    int_cond = confirmIntersection(brand)
+    if int_cond == False:
+        if userConfirm("Try again?"):
+            defineBrand()
+        else:
+            end()
+    else:
+        print("End of Sub Route") #STILL NEEDS WORK
+        return brand
+##END Brand Selection Route | SUB: Failed Selection
+
+##START Generic Functions
+def userConfirm(question):
+    reply = str(input(question+' (y/n): ')).lower().strip()
+    if reply[0] == 'y':
+        return True
+    if reply[0] == 'n':
+        return False
+    else:
+        return userConfirm("Please confirm using yes or no")
+
+def end():
+    print("Have a good day. Bye.")
+    sys.exit()
+##END Generic Functions
 
 if __name__ == '__main__':
     Main()
