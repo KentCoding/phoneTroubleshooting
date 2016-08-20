@@ -54,7 +54,7 @@ def defineBrand():
     int_cond = confirmIntersection(brand)
     if int_cond == False:
         if userConfirm("Try again?"):
-            defineBrand()
+            return defineBrand()
         else:
             end()
     else:
