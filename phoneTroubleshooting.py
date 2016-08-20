@@ -7,7 +7,7 @@ brand = None
 
 def init():
     #Define Module Settings
-    warnings.filterwarnings("ignore") #Disable for debuggings
+    warnings.filterwarnings("ignore") #Disable for debugging
     #Main Menu
     print("--Welcome to Troubleshooting Applet--")
     print("In your query please include the brand of your device and the problem / symptom of your current issue. \n")
@@ -16,7 +16,7 @@ def Main():
     init()
     query = input("Enter your query: ").lower()
     brand = brandSelector(query)
-    print(brand)
+    keywordSelection(query, brand)
 
 ##START Brand Selection Route
 def brandSelector(query):
@@ -61,6 +61,13 @@ def defineBrand():
         print("End of Sub Route") #STILL NEEDS WORK
         return brand
 ##END Brand Selection Route | SUB: Failed Selection
+
+##START Keyword Selection Route
+def keywordSelection(query, brand):
+    print("Keyword Selector") #START Debugging Section
+    print("Your query: ", query) 
+    print("Your brand:", brand) #END Debugging Section
+##END Keyword Selection Route
 
 ##START Generic Functions
 def userConfirm(question):
