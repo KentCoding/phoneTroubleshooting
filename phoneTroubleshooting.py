@@ -15,57 +15,53 @@ def init():
 def Main():
     init()
     query = input("Enter your query: ").lower()
-    brand = brandSelector(query)
+    brand = selector(brands, query, "brand", "brands")
     keywordSelection(query, brand)
-
-##START Brand Selection Route
-def brandSelector(query):
+    
+##START Intersection Functions
+def selector(array, query, var_name, array_name):
     try:
-        #Format Brands Query
-        brand = set(brands).intersection(query.split())
-        brand = ', '.join(brand)
+        #Format Variable from Query
+        var = set(array).intersection(query.split())
+        var = ', '.join(var)
         #Check Condition After Setting
-        int_cond = confirmIntersection(brand)
+        int_cond = confirmIntersection(var, array)
         if int_cond == False:
             raise NameError("No Intersection")
-        return brand
+        return var
     except NameError:
-        print("\nNo Intersection found between query defined brand and brands array\n")
-        return brandDetectionFailure()
+        print("\nNo intersection found between query defined {0} and {1} array.\n".format(var_name, array_name)) 
+        return failedIntersection(var, array, var_name, array_name)
 
-def confirmIntersection(brand):
-    if brand in brands:
+def confirmIntersection(var, array):
+    if var in array:
         return True
     else:
         return False
-##END Brand Selection Route
 
-##START Brand Selection Route | SUB: Failed Selection
-def brandDetectionFailure():
-    print("-Brand could not be found-")
-    print("Query still stored for your issue")
-    if userConfirm("Would you like to redefine a brand and continue?"):
-        return defineBrand()
+def failedIntersection(var, array, var_name, array_name):
+    print("-{0} could not be found-".format(var_name.title()))
+    if userConfirm("Would you like to redefine {0} and continue?".format(var_name)):
+        return defineError(var, array, var_name, array_name)
     else:
         end()
 
-def defineBrand():
-    brand = input("Enter your device's brand: ")
-    int_cond = confirmIntersection(brand)
+def defineError(var, array, var_name, array_name):
+    var = input("Enter your device's {0}: ".format(var_name))
+    int_cond = confirmIntersection(var, array)
     if int_cond == False:
         if userConfirm("Try again?"):
-            return defineBrand()
+            return defineError(var, array, var_name, array_name)
         else:
             end()
     else:
-        print("End of Sub Route") #STILL NEEDS WORK
-        return brand
-##END Brand Selection Route | SUB: Failed Selection
+        return var
+##END Intersection Functions
 
 ##START Keyword Selection Route
 def keywordSelection(query, brand):
-    print("Keyword Selector") #START Debugging Section
-    print("Your query: ", query) 
+    print("---TEST PASSED---") #START Debugging Section
+    print("Your query:", query) 
     print("Your brand:", brand) #END Debugging Section
 ##END Keyword Selection Route
 
