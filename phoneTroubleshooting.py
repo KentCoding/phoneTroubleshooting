@@ -1,9 +1,11 @@
 #Import Modules
 import sys, warnings, string
 
-#Define Globals
+#Define Globals and Arrays
 brands = ["apple", "android", "windows"]
 brand = None
+solutions = ["screen", "battery", "speaker"]
+issue = None
 
 def init():
     #Define Module Settings
@@ -16,7 +18,8 @@ def Main():
     init()
     query = input("Enter your query: ").lower()
     brand = selector(brands, query, "brand", "brands")
-    keywordSelection(query, brand)
+    issue = selector(solutions, query, "issue", "solutions")
+    keywordSelection(query, brand, issue)
     
 ##START Intersection Functions
 def selector(array, query, var_name, array_name):
@@ -59,10 +62,11 @@ def defineError(var, array, var_name, array_name):
 ##END Intersection Functions
 
 ##START Keyword Selection Route
-def keywordSelection(query, brand):
+def keywordSelection(query, brand, issue):
     print("---TEST PASSED---") #START Debugging Section
     print("Your query:", query) 
-    print("Your brand:", brand) #END Debugging Section
+    print("Your brand:", brand) 
+    print("Your issue:", issue) #END Debugging Section
 ##END Keyword Selection Route
 
 ##START Generic Functions
