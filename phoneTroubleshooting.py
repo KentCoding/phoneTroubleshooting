@@ -1,5 +1,5 @@
 #Import Modules
-import sys, warnings, string
+import sys, warnings, string, os.path
 
 #Define Globals and Arrays
 brands = ["apple", "android", "windows"]
@@ -10,6 +10,15 @@ issue = None
 def init():
     #Define Module Settings
     warnings.filterwarnings("ignore") #Disable for debugging
+    #File Path Settings
+    if not os.path.exists("Solution.txt"): 
+        file = open("Solution.txt", "w")
+        file.write("Placeholder Text")
+        file.close()
+    else:
+        file = open("Solution.txt", "r")
+        content = file.read()
+        file.close()
     #Main Menu
     print("--Welcome to Troubleshooting Applet--")
     print("In your query please include the brand of your device and the problem / symptom of your current issue. \n")
