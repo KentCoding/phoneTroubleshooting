@@ -15,10 +15,11 @@ def init():
 def Main():
     init()
     query = input("Enter your query: ").lower()
-    brand = selector(brands, query)
+    brand = selector(brands, query, "brand", "brands")
     keywordSelection(query, brand)
-
-def selector(array, query):
+    
+##START Intersection Functions
+def selector(array, query, var_name, array_name):
     try:
         #Format Variable from Query
         var = set(array).intersection(query.split())
@@ -29,8 +30,8 @@ def selector(array, query):
             raise NameError("No Intersection")
         return var
     except NameError:
-        print("\nNo intersection found between query defined variable and {0} array.".format("xyz")) 
-        return failedIntersection(var, array)
+        print("\nNo intersection found between query defined {0} and {1} array.\n".format(var_name, array_name)) 
+        return failedIntersection(var, array, var_name, array_name)
 
 def confirmIntersection(var, array):
     if var in array:
@@ -38,28 +39,29 @@ def confirmIntersection(var, array):
     else:
         return False
 
-def failedIntersection(var, array):
-    print("-Intersection could not be found-")
-    if userConfirm("Would you like to redefine and continue?"):
-        return defineError(var, array)
+def failedIntersection(var, array, var_name, array_name):
+    print("-{0} could not be found-".format(var_name.title()))
+    if userConfirm("Would you like to redefine {0} and continue?".format(var_name)):
+        return defineError(var, array, var_name, array_name)
     else:
         end()
 
-def defineError(var, array):
+def defineError(var, array, var_name, array_name):
     var = input("Enter: ")
     int_cond = confirmIntersection(var, array)
     if int_cond == False:
         if userConfirm("Try again?"):
-            return defineError()
+            return defineError(var, array, var_name, array_name)
         else:
             end()
     else:
         return var
+##END Intersection Functions
 
 ##START Keyword Selection Route
 def keywordSelection(query, brand):
     print("---TEST PASSED---") #START Debugging Section
-    print("Your query: ", query) 
+    print("Your query:", query) 
     print("Your brand:", brand) #END Debugging Section
 ##END Keyword Selection Route
 
