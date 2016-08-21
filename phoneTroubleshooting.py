@@ -47,7 +47,7 @@ def failedIntersection(var, array, var_name, array_name):
         end()
 
 def defineError(var, array, var_name, array_name):
-    var = input("Enter: ")
+    var = input("Enter your device's {0}: ".format(var_name))
     int_cond = confirmIntersection(var, array)
     if int_cond == False:
         if userConfirm("Try again?"):
