@@ -15,56 +15,50 @@ def init():
 def Main():
     init()
     query = input("Enter your query: ").lower()
-    brand = brandSelector(query)
+    brand = selector(brands, query)
     keywordSelection(query, brand)
 
-##START Brand Selection Route
-def brandSelector(query):
+def selector(array, query):
     try:
-        #Format Brands Query
-        brand = set(brands).intersection(query.split())
-        brand = ', '.join(brand)
+        #Format Variable from Query
+        var = set(array).intersection(query.split())
+        var = ', '.join(var)
         #Check Condition After Setting
-        int_cond = confirmIntersection(brand)
+        int_cond = confirmIntersection(var, array)
         if int_cond == False:
             raise NameError("No Intersection")
-        return brand
+        return var
     except NameError:
-        print("\nNo Intersection found between query defined brand and brands array\n")
-        return brandDetectionFailure()
+        print("\nNo intersection found between query defined variable and {0} array.".format("xyz")) 
+        return failedIntersection(var, array)
 
-def confirmIntersection(brand):
-    if brand in brands:
+def confirmIntersection(var, array):
+    if var in array:
         return True
     else:
         return False
-##END Brand Selection Route
 
-##START Brand Selection Route | SUB: Failed Selection
-def brandDetectionFailure():
-    print("-Brand could not be found-")
-    print("Query still stored for your issue")
-    if userConfirm("Would you like to redefine a brand and continue?"):
-        return defineBrand()
+def failedIntersection(var, array):
+    print("-Intersection could not be found-")
+    if userConfirm("Would you like to redefine and continue?"):
+        return defineError(var, array)
     else:
         end()
 
-def defineBrand():
-    brand = input("Enter your device's brand: ")
-    int_cond = confirmIntersection(brand)
+def defineError(var, array):
+    var = input("Enter: ")
+    int_cond = confirmIntersection(var, array)
     if int_cond == False:
         if userConfirm("Try again?"):
-            return defineBrand()
+            return defineError()
         else:
             end()
     else:
-        print("End of Sub Route") #STILL NEEDS WORK
-        return brand
-##END Brand Selection Route | SUB: Failed Selection
+        return var
 
 ##START Keyword Selection Route
 def keywordSelection(query, brand):
-    print("Keyword Selector") #START Debugging Section
+    print("---TEST PASSED---") #START Debugging Section
     print("Your query: ", query) 
     print("Your brand:", brand) #END Debugging Section
 ##END Keyword Selection Route
