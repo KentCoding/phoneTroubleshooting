@@ -9,16 +9,18 @@ issue = None
 
 def init():
     #Define Module Settings
-    warnings.filterwarnings("ignore") #Disable for debugging
+    #warnings.filterwarnings("ignore") #Disable for debugging
     #File Path Settings
-    if not os.path.exists("Solution.txt"): 
-        file = open("Solution.txt", "w")
+    if not os.path.exists("Solution.py"): 
+        file = open("Solution.py", "w")
         file.write("Placeholder Text")
         file.close()
     else:
-        file = open("Solution.txt", "r")
-        content = file.read()
+        file = open("Solution.py", "r")
+        text = file.read()
+        print(text)
         file.close()
+        sys.exit()
     #Main Menu
     print("--Welcome to Troubleshooting Applet--")
     print("In your query please include the brand of your device and the problem / symptom of your current issue. \n")
