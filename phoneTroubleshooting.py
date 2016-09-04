@@ -1,26 +1,13 @@
 #Import Modules
-import sys, warnings, string, os.path
+import sys, os.path, warnings, string, apple, android, windows
 
 #Define Globals and Arrays
 brands = ["apple", "android", "windows"]
 brand = None
-solutions = ["screen", "battery", "speaker"]
-issue = None
 
 def init():
     #Define Module Settings
     #warnings.filterwarnings("ignore") #Disable for debugging
-    #File Path Settings
-    if not os.path.exists("Solution.py"): 
-        file = open("Solution.py", "w")
-        file.write("Placeholder Text")
-        file.close()
-    else:
-        file = open("Solution.py", "r")
-        text = file.read()
-        print(text)
-        file.close()
-        sys.exit()
     #Main Menu
     print("--Welcome to Troubleshooting Applet--")
     print("In your query please include the brand of your device and the problem / symptom of your current issue. \n")
@@ -29,6 +16,7 @@ def Main():
     init()
     query = input("Enter your query: ").lower()
     brand = selector(brands, query, "brand", "brands")
+    solutions = solutionsImporter(brand, brands, "brand", "brands")
     issue = selector(solutions, query, "issue", "solutions")
     keywordSelection(query, brand, issue)
     
@@ -89,6 +77,22 @@ def userConfirm(question):
         return False
     else:
         return userConfirm("Please confirm using yes or no")
+    
+def solutionsImporter(var, array, var_name, array_name):
+    int_cond = confirmIntersection(var, array)
+    if int_cond == False:
+        failedIntersection(var, array, var_name, array_name)
+        return solutionsImporter(var, array, var_name, array_name)
+    elif var == "apple":
+        solutions = apple.solutions()
+        return solutions
+    elif var == "android":
+        solutions = android.solutions()
+        return solutions
+    elif var == "windows":
+        solutions = windows.solutions()
+        return solutions
+    return
 
 def end():
     print("Have a good day. Bye.")
