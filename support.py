@@ -43,7 +43,7 @@ def sendMessage(issue, brand, query, ID, full_name, user_email):
 
     #Define Server Connection Details
     SMTPserver = 'SET SMTP SERVER ADDRESS'
-    sender = user_email #Set sender email address, if supported by SMTP server
+    sender = user_email
     destination = ['SET DESTINATION EMAIL ADDRESS']
 
     USERNAME = "SET USERNAME"

@@ -65,7 +65,7 @@ def failedIntersection(var, array, var_name, array_name): #See summary below reg
 #{4} | passes array name to function so that if required it may be rerouted to the next step
 
 def defineError(var, array, var_name, array_name): #See summary below regarding passed parameters
-    var = input("Enter your device's {0}: ".format(var_name)) #User input with query printed with minor variable formatting
+    var = input("Enter your device's {0}: ".format(var_name)).lower() #User input with query printed with minor variable formatting
     int_cond = confirmIntersection(var, array) #Call confirmIntersection function for boolean result to check for intersection between variable and array
     if int_cond == False: #If intersection fails for a second time allow user to reattempt variable entry
         if generic.userConfirm("Try again?"): #Query to check if user wishes to continue
