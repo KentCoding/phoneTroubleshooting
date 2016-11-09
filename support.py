@@ -1,6 +1,9 @@
 ##Import Modules
 #Including custom module for generic functions and warnings module to handle SMTP debugging.
-import generic, warnings
+import generic, warnings, time
+
+DEBUG_MODE = True
+
 #Issue Handler Module
 
 def internalSupport(issue, question): #UI for each defined response upon calling from brand module
@@ -32,7 +35,16 @@ def externalSupport(issue, skip, brand, query, ID):
         generic.end() #End the program
     return
 
+def messageSent():
+    print("WARNING: DEBUG MODE ACTIVE")
+    print("Sending.")
+    print("Sending..")
+    print("Sending...")
+    generic.end()
+
 def sendMessage(issue, brand, query, ID, full_name, user_email):
+    if DEBUG_MODE == True:
+        messageSent()
     #Start UI Loading CLI
     print("Sending.")
 

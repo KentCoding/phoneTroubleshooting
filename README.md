@@ -22,3 +22,6 @@ USERNAME = "GMAIL_USERNAME@gmail.com"
 PASSWORD = "GMAIL_PASSWORD"
 ```
 Once you have made this small tweak your Phone Troubleshooting application will be ready to go with a few demo brands and potential solutions.
+
+ALT:
+If you wish to only test the program, set DEBUG_MODE to False in Support.py - this will skip the SMTP Server connection to prevent any errors if no password has been set.
